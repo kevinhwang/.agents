@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1680 600" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5b6470"/>
+    </marker>
+    <marker id="arrowLoop" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#d98a2b"/>
+    </marker>
+  </defs>
+
+  <!-- background -->
+  <rect x="0" y="0" width="1680" height="600" fill="#ffffff"/>
+
+  <!-- title -->
+  <text x="50" y="58" font-size="34" font-weight="700" fill="#1c2128">The Agentic Loop</text>
+  <text x="52" y="92" font-size="17" fill="#6b7480">Reason → Act → Observe, repeated until the goal is met — the ReAct pattern.</text>
+
+  <!-- legend -->
+  <g font-size="14.5" fill="#3f474f">
+    <rect x="612" y="40" width="20" height="20" rx="5" fill="#eceef1" stroke="#9aa3ad"/>
+    <text x="640" y="55">Input / Output</text>
+
+    <rect x="772" y="40" width="20" height="20" rx="5" fill="#dbe4fb" stroke="#7c9be0"/>
+    <text x="800" y="55">Model · reasoning</text>
+
+    <rect x="970" y="40" width="20" height="20" rx="5" fill="#efe6fb" stroke="#b08be0"/>
+    <text x="998" y="55">Agent harness</text>
+
+    <rect x="1148" y="40" width="20" height="20" rx="5" fill="#2e9e6b" stroke="#1f7d52"/>
+    <text x="1176" y="55">Tool execution</text>
+
+    <rect x="1318" y="40" width="20" height="20" rx="5" fill="#def0f1" stroke="#5bb8bf"/>
+    <text x="1346" y="55">Observation</text>
+  </g>
+
+  <!-- ===================== SCOPE CONTAINER ===================== -->
+  <rect x="280" y="150" width="1368" height="200" rx="18" fill="#f8f6fc" stroke="#bcb2dc" stroke-width="1.6" stroke-dasharray="7 6"/>
+  <text x="296" y="180" font-size="14" font-weight="700" letter-spacing="1.2" fill="#8a7bc0">AGENT HARNESS · THE AGENTIC LOOP</text>
+
+  <!-- ===================== NODES (h=96, y 192..288, center 240) ===================== -->
+
+  <!-- USER PROMPT (I/O) -->
+  <g>
+    <rect x="60" y="192" width="180" height="96" rx="12" fill="#eceef1" stroke="#9aa3ad" stroke-width="1.6"/>
+    <text x="150" y="235" text-anchor="middle" font-size="18" font-weight="700" fill="#2b3138">USER PROMPT</text>
+    <text x="150" y="262" text-anchor="middle" font-size="13.5" font-family="ui-monospace, Menlo, monospace" fill="#5b636d">task · question</text>
+  </g>
+
+  <!-- REASON (model) -->
+  <g>
+    <rect x="312" y="192" width="188" height="96" rx="12" fill="#dbe4fb" stroke="#7c9be0" stroke-width="1.6"/>
+    <text x="406" y="235" text-anchor="middle" font-size="18" font-weight="700" fill="#2f4a86">REASON</text>
+    <text x="406" y="262" text-anchor="middle" font-size="13" font-family="ui-monospace, Menlo, monospace" fill="#4a64a0">chain-of-thought · plan</text>
+  </g>
+
+  <!-- DECIDE (model) -->
+  <g>
+    <rect x="536" y="192" width="188" height="96" rx="12" fill="#dbe4fb" stroke="#7c9be0" stroke-width="1.6"/>
+    <text x="630" y="235" text-anchor="middle" font-size="18" font-weight="700" fill="#2f4a86">DECIDE</text>
+    <text x="630" y="262" text-anchor="middle" font-size="13" font-family="ui-monospace, Menlo, monospace" fill="#4a64a0">act or answer?</text>
+  </g>
+
+  <!-- ACT (model) -->
+  <g>
+    <rect x="760" y="192" width="188" height="96" rx="12" fill="#dbe4fb" stroke="#7c9be0" stroke-width="1.6"/>
+    <text x="854" y="235" text-anchor="middle" font-size="18" font-weight="700" fill="#2f4a86">ACT</text>
+    <text x="854" y="262" text-anchor="middle" font-size="13" font-family="ui-monospace, Menlo, monospace" fill="#4a64a0">select tool · args</text>
+  </g>
+
+  <!-- PERMISSION (harness) -->
+  <g>
+    <rect x="984" y="192" width="188" height="96" rx="12" fill="#efe6fb" stroke="#b08be0" stroke-width="1.6"/>
+    <text x="1078" y="235" text-anchor="middle" font-size="18" font-weight="700" fill="#6a3fa0">PERMISSION</text>
+    <text x="1078" y="262" text-anchor="middle" font-size="13" font-family="ui-monospace, Menlo, monospace" fill="#7d56b0">allow · deny · ask</text>
+  </g>
+
+  <!-- EXECUTE (tool) -->
+  <g>
+    <rect x="1208" y="192" width="188" height="96" rx="12" fill="#2e9e6b" stroke="#1f7d52" stroke-width="1.6"/>
+    <text x="1302" y="235" text-anchor="middle" font-size="18" font-weight="700" fill="#ffffff">EXECUTE</text>
+    <text x="1302" y="262" text-anchor="middle" font-size="13" font-family="ui-monospace, Menlo, monospace" fill="#d7f2e5">Bash · API · MCP</text>
+  </g>
+
+  <!-- OBSERVE (observation) -->
+  <g>
+    <rect x="1432" y="192" width="188" height="96" rx="12" fill="#def0f1" stroke="#5bb8bf" stroke-width="1.6"/>
+    <text x="1526" y="235" text-anchor="middle" font-size="18" font-weight="700" fill="#1f6e74">OBSERVE</text>
+    <text x="1526" y="262" text-anchor="middle" font-size="13" font-family="ui-monospace, Menlo, monospace" fill="#2f8d93">capture result</text>
+  </g>
+
+  <!-- FINAL ANSWER (I/O) -->
+  <g>
+    <rect x="538" y="450" width="184" height="84" rx="12" fill="#eceef1" stroke="#9aa3ad" stroke-width="1.6"/>
+    <text x="630" y="488" text-anchor="middle" font-size="18" font-weight="700" fill="#2b3138">FINAL ANSWER</text>
+    <text x="630" y="512" text-anchor="middle" font-size="13.5" font-family="ui-monospace, Menlo, monospace" fill="#5b636d">respond to user</text>
+  </g>
+
+  <!-- ===================== ARROWS ===================== -->
+  <g stroke="#5b6470" stroke-width="2" fill="none">
+    <line x1="240" y1="240" x2="306" y2="240" marker-end="url(#arrow)"/>
+    <line x1="500" y1="240" x2="530" y2="240" marker-end="url(#arrow)"/>
+    <line x1="724" y1="240" x2="754" y2="240" marker-end="url(#arrow)"/>
+    <line x1="948" y1="240" x2="978" y2="240" marker-end="url(#arrow)"/>
+    <line x1="1172" y1="240" x2="1202" y2="240" marker-end="url(#arrow)"/>
+    <line x1="1396" y1="240" x2="1426" y2="240" marker-end="url(#arrow)"/>
+    <!-- decide -> final answer -->
+    <line x1="630" y1="288" x2="630" y2="444" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- loop-back: observe -> reason (along bottom) -->
+  <g stroke="#d98a2b" stroke-width="2.2" fill="none">
+    <path d="M1526,288 L1526,584 L406,584 L406,292" marker-end="url(#arrowLoop)"/>
+  </g>
+
+  <!-- ===================== EDGE LABELS ===================== -->
+  <g font-family="ui-monospace, Menlo, monospace">
+    <text x="742" y="228" text-anchor="middle" font-size="13" fill="#7a828c">act</text>
+    <text x="646" y="372" font-size="13.5" fill="#7a828c">answer · goal met</text>
+    <text x="966" y="608" text-anchor="middle" font-size="14" fill="#c97f22" font-weight="600">append observation → context · repeat</text>
+  </g>
+</svg>

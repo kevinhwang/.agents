@@ -1,0 +1,84 @@
+%% Published high-level reconstruction: https://huggingface.co/blog/agent-intrusion-technical-timeline
+%% For a pixel-specific recreation, use the paired custom SVG instead of native Mermaid.
+%%{init: {'theme': 'base', 'themeVariables': {'background': 'transparent', 'primaryTextColor': '#f8fafc', 'lineColor': '#b8c0cc', 'edgeLabelBackground': '#17191d', 'fontFamily': 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', 'fontSize': '15px'}, 'themeCSS': '#my-svg .label, #my-svg .edgeLabel { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important; } #my-svg .edgeLabel, #my-svg .edgeLabel p, #my-svg .edgeLabel span, #my-svg .labelBkg { background-color: #17191d !important; color: #f8fafc !important; } #my-svg .edgeLabel rect { fill: #17191d !important; opacity: 1 !important; }'}}%%
+block-beta
+  columns 20
+
+  Title["The OpenAI–Hugging Face Incident"]:20
+  StageOne["STAGE 1 · REACHING THE LAUNCHPAD"]:20
+
+  block:OpenAIPlatform:7
+    columns 3
+    OpenAIHeading["OPENAI PLATFORM · MODEL EVALUATION"]:3
+    Eval["Evaluation sandbox<br/>frontier model under eval"] space Registry["Package registry<br/>find a route out"]
+  end
+  space
+  block:PublicInternet:3
+    columns 1
+    InternetHeading["PUBLIC INTERNET"]
+    Egress["Egress<br/>reach the open net"]
+  end
+  space
+  block:ThirdPartySandbox:5
+    columns 1
+    ThirdPartyHeading["THIRD-PARTY SANDBOX · COMPROMISED"]
+    Launchpad["Rooted code-eval sandbox<br/>C2 · staging · egress base"]
+  end
+  PublicServices["C2 / dead drops<br/>capture service · pastebins"]:3
+
+  space:9
+  block:HuggingFacePerimeter:8
+    columns 1
+    PerimeterHeading["HUGGING FACE PERIMETER · INITIAL ACCESS"]
+    Processor["Dataset processor pod<br/>file read + template injection"]
+  end
+  Readback["read-back output via<br/>HF API + dead-drops"]:3
+
+  space:2
+  block:HuggingFaceInternal:16
+    columns 7
+    InternalHeading["HUGGING FACE INTERNAL NETWORK · LATERAL MOVEMENT & ESCALATION"]:7
+    Metadata["Cloud metadata<br/>node-role credentials"] space K8s["Kubernetes API<br/>node impersonation"] space Mesh["Mesh VPN<br/>internal network pivot"] space Source["Source control<br/>GitHub App token · CI blocked"]
+  end
+  space:2
+
+  Eval -- "0-day" --> Registry
+  Registry -- "egress" --> Egress
+  Egress -- "root it" --> Launchpad
+  Launchpad --> PublicServices
+  Launchpad -- "initial access" --> Processor
+  Processor -.-> PublicServices
+  Processor -- "node credentials" --> Metadata
+  Metadata -- "impersonate node" --> K8s
+  Processor -- "mesh auth key" --> Mesh
+  Mesh -- "via mesh" --> Source
+
+  classDef title fill:transparent,stroke:transparent,color:#f8fafc,font-size:26px,font-weight:650;
+  classDef stage fill:transparent,stroke:transparent,color:#a7adb8,font-size:14px,font-weight:650;
+  classDef caption fill:transparent,stroke:transparent,color:#8fb9e3,font-size:14px,font-weight:600;
+  classDef zoneGreen fill:#18241f,stroke:#597866,color:#f8fafc,stroke-width:1.5px,rx:12px,ry:12px;
+  classDef zoneBlue fill:#1b232d,stroke:#64788f,color:#f8fafc,stroke-width:1.5px,rx:12px,ry:12px;
+  classDef zoneOchre fill:#262119,stroke:#876b42,color:#f8fafc,stroke-width:1.5px,rx:12px,ry:12px;
+  classDef groupGreen fill:transparent,stroke:#50735e,color:#a6c4af,stroke-width:1.5px,rx:14px,ry:14px;
+  classDef groupNeutral fill:transparent,stroke:#555e69,color:#aab2bc,stroke-width:1.5px,rx:14px,ry:14px;
+  classDef groupOchre fill:transparent,stroke:#80673f,color:#c6a96d,stroke-width:1.5px,rx:14px,ry:14px;
+  classDef groupRed fill:transparent,stroke:#824e5d,color:#ce929e,stroke-width:1.5px,rx:14px,ry:14px;
+  classDef neutral fill:#1c1d20,stroke:#555b64,color:#f8fafc,stroke-width:1.5px,rx:12px,ry:12px;
+  classDef pivot fill:#211d29,stroke:#806aa0,color:#f8fafc,stroke-width:1.5px,rx:12px,ry:12px;
+  classDef impact fill:#291d24,stroke:#9b6474,color:#fff1f2,stroke-width:1.5px,rx:12px,ry:12px;
+  classDef groupHeading fill:transparent,stroke:transparent,color:#aab1bb,font-size:12px,font-weight:650;
+
+  class Title title
+  class StageOne stage
+  class Readback caption
+  class Eval,Registry zoneGreen
+  class Egress,PublicServices zoneBlue
+  class Launchpad,Processor zoneOchre
+  class Metadata,K8s neutral
+  class Mesh pivot
+  class Source impact
+  class OpenAIHeading,InternetHeading,ThirdPartyHeading,PerimeterHeading,InternalHeading groupHeading
+  class OpenAIPlatform groupGreen
+  class PublicInternet groupNeutral
+  class ThirdPartySandbox,HuggingFacePerimeter groupOchre
+  class HuggingFaceInternal groupRed

@@ -1,0 +1,138 @@
+<svg width="2048" height="1050" viewBox="0 0 2048 1050" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title description">
+  <title id="title">The OpenAI–Hugging Face Incident</title>
+  <desc id="description">High-level public incident path: an evaluation sandbox reaches a rooted third-party sandbox, accesses a Hugging Face dataset processor, then moves through cloud metadata, Kubernetes, mesh VPN, and source control.</desc>
+  <style>
+    .ui { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .title { fill: #f3f4f6; font-size: 31px; font-weight: 700; letter-spacing: -0.45px; }
+    .subtitle { fill: #c0c7d1; font-size: 16px; }
+    .stage { font-size: 16px; font-weight: 700; letter-spacing: 1.1px; }
+    .group-label { font-size: 13px; font-weight: 700; letter-spacing: 1.35px; }
+    .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 1.15px; }
+    .card-title { fill: #f4f5f7; font-size: 18px; font-weight: 650; letter-spacing: -0.18px; }
+    .card-detail { fill: #a9b1bd; font-size: 14px; }
+    .label { fill: #e8ecf2; font-size: 13px; font-weight: 600; }
+    .caption { fill: #8fb9e3; font-size: 14px; font-weight: 650; letter-spacing: 0.45px; }
+    .group { fill-opacity: 0.96; stroke-width: 1.75; }
+    .boundary-eval { fill: #17261d; }
+    .boundary-internet { fill: #172135; }
+    .boundary-third-party { fill: #251d12; }
+    .boundary-perimeter { fill: #251e12; }
+    .boundary-internal { fill: #1d1b23; }
+    .card { fill: #222326; stroke-width: 1.9; }
+    .card-blue { fill: #19263a; }
+    .card-purple { fill: #201e26; }
+    .card-impact { fill: #2a2027; }
+    .link { fill: none; stroke-width: 2.1; stroke-linecap: round; stroke-linejoin: round; }
+    .link-dashed { fill: none; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 6 6; }
+  </style>
+  <defs>
+    <marker id="arrow-grey" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#aeb8c6" /></marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#76a58a" /></marker>
+    <marker id="arrow-orange" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#c79a5d" /></marker>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#82acd4" /></marker>
+    <marker id="arrow-red" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#bf7b88" /></marker>
+    <marker id="arrow-purple" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#b497cf" /></marker>
+  </defs>
+
+  <rect width="2048" height="1050" fill="#1D1D1D" />
+
+  <text class="ui title" x="64" y="69">The OpenAI–Hugging Face Incident</text>
+  <a href="https://huggingface.co/blog/agent-intrusion-technical-timeline" target="_blank">
+    <text class="ui subtitle" x="64" y="96">From https://huggingface.co/blog/agent-intrusion-technical-timeline</text>
+  </a>
+
+  <!-- Stage 1 group boundaries -->
+  <rect class="group boundary-eval" x="56" y="174" width="578" height="198" rx="20" stroke="#638d70" />
+  <text class="ui group-label" x="82" y="204" fill="#8fb59b">OPENAI PLATFORM · MODEL EVALUATION</text>
+  <rect class="group boundary-internet" x="661" y="174" width="272" height="198" rx="20" stroke="#71849f" />
+  <text class="ui group-label" x="686" y="204" fill="#a6b5c9">PUBLIC INTERNET</text>
+  <rect class="group boundary-third-party" x="960" y="174" width="488" height="198" rx="20" stroke="#a7804a" />
+  <text class="ui group-label" x="986" y="204" fill="#c6a466">THIRD-PARTY SANDBOX · COMPROMISED</text>
+
+  <!-- Stage 1 connectors -->
+  <path class="link" d="M298 272H349" stroke="#bd7c86" marker-end="url(#arrow-red)" />
+  <rect x="286" y="239" width="76" height="24" rx="5" fill="#171b22" stroke="#38404a" />
+  <text class="ui label" x="324" y="256" text-anchor="middle">0-day</text>
+  <path class="link" d="M584 272H708" stroke="#83a894" marker-end="url(#arrow-green)" />
+  <rect x="611" y="239" width="70" height="24" rx="5" fill="#171b22" stroke="#38404a" />
+  <text class="ui label" x="646" y="256" text-anchor="middle">egress</text>
+  <path class="link" d="M886 272H1012" stroke="#c79a5d" marker-end="url(#arrow-orange)" />
+  <rect x="916" y="239" width="67" height="24" rx="5" fill="#171b22" stroke="#38404a" />
+  <text class="ui label" x="950" y="256" text-anchor="middle">root it</text>
+  <path class="link" d="M1397 272H1614" stroke="#aeb8c6" marker-end="url(#arrow-grey)" />
+
+  <!-- Stage 1 cards -->
+  <rect class="card" x="82" y="229" width="216" height="105" rx="15" stroke="#7fa98e" />
+  <text class="ui eyebrow" x="190" y="252" text-anchor="middle" fill="#99c1a4">OPENAI · EVAL</text>
+  <text class="ui card-title" x="190" y="286" text-anchor="middle">Evaluation sandbox</text>
+  <text class="ui card-detail" x="190" y="311" text-anchor="middle">frontier model under eval</text>
+  <rect class="card" x="349" y="229" width="235" height="105" rx="15" stroke="#7fa98e" />
+  <text class="ui eyebrow" x="466" y="252" text-anchor="middle" fill="#99c1a4">OPENAI · INFRA</text>
+  <text class="ui card-title" x="466" y="286" text-anchor="middle">Package registry</text>
+  <text class="ui card-detail" x="466" y="311" text-anchor="middle">find a route out</text>
+  <rect class="card" x="708" y="229" width="178" height="105" rx="15" stroke="#9099a5" />
+  <text class="ui eyebrow" x="797" y="252" text-anchor="middle" fill="#b9c0ca">PUBLIC INTERNET</text>
+  <text class="ui card-title" x="797" y="286" text-anchor="middle">Egress</text>
+  <text class="ui card-detail" x="797" y="311" text-anchor="middle">reach the open net</text>
+  <rect class="card" x="1012" y="218" width="385" height="126" rx="15" stroke="#c19054" />
+  <text class="ui eyebrow" x="1204" y="243" text-anchor="middle" fill="#d3ad70">THIRD-PARTY SANDBOX · uid=0</text>
+  <text class="ui card-title" x="1204" y="282" text-anchor="middle">Rooted code-eval sandbox</text>
+  <text class="ui card-detail" x="1204" y="308" text-anchor="middle">C2 · staging · egress base</text>
+  <rect class="card card-blue" x="1614" y="228" width="352" height="108" rx="15" stroke="#7d9ec8" />
+  <text class="ui eyebrow" x="1790" y="252" text-anchor="middle" fill="#a3bee0">PUBLIC SERVICES</text>
+  <text class="ui card-title" x="1790" y="286" text-anchor="middle">C2 / dead drops</text>
+  <text class="ui card-detail" x="1790" y="311" text-anchor="middle">capture service · pastebins</text>
+
+  <!-- Initial access and read-back -->
+  <text class="ui caption" x="1459" y="440">read-back output via HF API + dead-drops</text>
+  <path class="link" d="M1204 344V527" stroke="#c79a5d" marker-end="url(#arrow-orange)" />
+  <rect x="1248" y="455" width="98" height="24" rx="5" fill="#171b22" stroke="#38404a" />
+  <text class="ui label" x="1297" y="472" text-anchor="middle">initial access</text>
+  <path class="link-dashed" d="M1389 602C1488 546 1530 442 1634 348" stroke="#82acd4" marker-end="url(#arrow-blue)" />
+
+  <rect class="group boundary-perimeter" x="1014" y="491" width="500" height="177" rx="20" stroke="#a7804a" />
+  <text class="ui group-label" x="1040" y="521" fill="#c6a466">HUGGING FACE PERIMETER · PROD POD</text>
+  <rect class="card" x="1044" y="543" width="440" height="94" rx="15" stroke="#c19054" />
+  <text class="ui eyebrow" x="1264" y="566" text-anchor="middle" fill="#d3ad70">HF PERIMETER · DATASET PROCESSOR</text>
+  <text class="ui card-title" x="1264" y="597" text-anchor="middle">Dataset processor pod</text>
+  <text class="ui card-detail" x="1264" y="620" text-anchor="middle">HDF5 file read + Jinja2 template injection</text>
+
+  <!-- Stage 3 connectors, placed behind internal cards -->
+  <rect class="group boundary-internal" x="272" y="771" width="1695" height="218" rx="20" stroke="#a98ac6" />
+  <text class="ui group-label" x="300" y="802" fill="#c5afd9">HUGGING FACE INTERNAL NETWORK</text>
+  <!-- These links sit above the group surface but below its cards. -->
+  <path class="link" d="M1145 637C1045 699 853 727 660 825" stroke="#bf7b88" marker-end="url(#arrow-red)" />
+  <path class="link" d="M1264 637C1264 704 1140 755 935 825" stroke="#bf7b88" marker-end="url(#arrow-red)" />
+  <path class="link" d="M1334 637C1391 711 1390 748 1390 825" stroke="#b497cf" marker-end="url(#arrow-purple)" />
+  <path class="link" d="M660 874H760" stroke="#aeb8c6" marker-end="url(#arrow-grey)" />
+  <path class="link" d="M1540 874H1640" stroke="#b497cf" marker-end="url(#arrow-purple)" />
+  <rect x="1552" y="840" width="78" height="24" rx="5" fill="#171b22" stroke="#38404a" />
+  <text class="ui label" x="1591" y="857" text-anchor="middle">via mesh</text>
+  <rect class="card card-impact" x="300" y="825" width="360" height="100" rx="15" stroke="#d28a9a" />
+  <text class="ui eyebrow" x="480" y="849" text-anchor="middle" fill="#e1a4b1">FROM POD</text>
+  <text class="ui card-title" x="480" y="882" text-anchor="middle">Cloud metadata</text>
+  <text class="ui card-detail" x="480" y="906" text-anchor="middle">IMDS · node-role credentials</text>
+  <rect class="card" x="760" y="825" width="350" height="100" rx="15" stroke="#9aa4b1" />
+  <text class="ui eyebrow" x="935" y="849" text-anchor="middle" fill="#c3cad4">FROM POD MESH</text>
+  <text class="ui card-title" x="935" y="882" text-anchor="middle">Kubernetes API</text>
+  <text class="ui card-detail" x="935" y="906" text-anchor="middle">node impersonation · service tokens</text>
+  <rect class="card card-purple" x="1240" y="825" width="300" height="100" rx="15" stroke="#b497cf" />
+  <text class="ui eyebrow" x="1390" y="849" text-anchor="middle" fill="#c5afd9">NETWORK PIVOT</text>
+  <text class="ui card-title" x="1390" y="882" text-anchor="middle">Mesh VPN</text>
+  <text class="ui card-detail" x="1390" y="906" text-anchor="middle">userspace-net + SOCKS5</text>
+  <rect class="card card-impact" x="1640" y="825" width="297" height="100" rx="15" stroke="#d28a9a" />
+  <text class="ui eyebrow" x="1788" y="849" text-anchor="middle" fill="#e1a4b1">VIA MESH</text>
+  <text class="ui card-title" x="1788" y="882" text-anchor="middle">Source control</text>
+  <text class="ui card-detail" x="1788" y="906" text-anchor="middle">GitHub App tokens · CI blocked</text>
+
+  <!-- Render connector chips and captions last so paths cannot obscure them. -->
+  <rect x="856" y="708" width="124" height="24" rx="5" fill="#171b22" stroke="#4d5868" />
+  <text class="ui label" x="918" y="725" text-anchor="middle">node credentials</text>
+  <rect x="1169" y="708" width="129" height="24" rx="5" fill="#171b22" stroke="#4d5868" />
+  <text class="ui label" x="1234" y="725" text-anchor="middle">impersonate node</text>
+  <rect x="1392" y="708" width="102" height="24" rx="5" fill="#171b22" stroke="#4d5868" />
+  <text class="ui label" x="1443" y="725" text-anchor="middle">mesh auth key</text>
+  <text class="ui stage" x="64" y="151" fill="#82b99a">STAGE 1 · REACHING THE LAUNCHPAD</text>
+  <text class="ui stage" x="1038" y="438" fill="#c9a15d">STAGE 2 · INITIAL ACCESS</text>
+  <text class="ui stage" x="320" y="747" fill="#d58a96">STAGE 3 · LATERAL MOVEMENT &amp; ESCALATION INSIDE HUGGING FACE</text>
+</svg>
